@@ -1,0 +1,288 @@
+/* ==================================================
+   VARIABLES GLOBALES — SISTEMA ÚNICO
+================================================== */
+:root{
+  --bg:#06070b;                  /* Negro base */
+  --panel:rgba(255,255,255,.035);
+  --border:rgba(255,255,255,.14);
+
+  --text:#ffffff;
+  --muted:rgba(255,255,255,.72);
+  --muted2:rgba(255,255,255,.55);
+
+  --shadow: 0 28px 90px rgba(0,0,0,.75);
+
+  --radius:22px;
+  --radius-lg:32px;
+  --max:1180px;
+}
+
+/* ==================================================
+   RESET
+================================================== */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html,body{
+  height:100%;
+}
+
+/* ==================================================
+   FONDO GLOBAL ÚNICO (IMAGEN + COLOR)
+================================================== */
+body{
+  font-family:'Inter',system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
+  color:var(--text);
+  overflow-x:hidden;
+
+  /* 🔥 UNA SOLA IMAGEN PARA TODA LA PÁGINA */
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(1200px 800px at 50% 0%, rgba(255,255,255,.08), transparent 60%),
+    radial-gradient(900px 700px at 0% 50%, rgba(255,255,255,.06), transparent 65%),
+    radial-gradient(900px 700px at 100% 50%, rgba(255,255,255,.06), transparent 65%),
+    radial-gradient(1200px 900px at 50% 100%, rgba(255,255,255,.08), transparent 60%);
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+}
+
+/* ==================================================
+   WRAPPER
+================================================== */
+.wrap{
+  position:relative;
+  z-index:1;
+}
+
+/* ==================================================
+   NAVBAR (SIN FONDO PROPIO)
+================================================== */
+.nav{
+  position:sticky;
+  top:0;
+  z-index:50;
+  backdrop-filter: blur(12px);
+  background:rgba(6,7,11,.75);
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.nav-inner{
+  max-width:var(--max);
+  margin:auto;
+  padding:18px 22px;
+  display:flex;
+  gap:14px;
+  align-items:center;
+  justify-content:center;
+}
+
+.brand{
+  display:flex;
+  flex:1;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  text-align:center;
+}
+
+.brand-mark{
+  width:34px;
+  height:34px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  display:grid;
+  place-items:center;
+  font-weight:900;
+}
+
+.brand strong{
+  font-size:13px;
+  letter-spacing:.18em;
+}
+
+.brand small{
+  display:block;
+  font-size:10px;
+  letter-spacing:.28em;
+  color:var(--muted2);
+}
+
+/* ==================================================
+   SECCIONES — LIMPIAS, SIN GLOW PROPIO
+================================================== */
+section{
+  padding:90px 22px;
+  background: var(--bg);
+}
+
+.container{
+  max-width:var(--max);
+  margin:auto;
+}
+
+.center{text-align:center;}
+
+/* ==================================================
+   TIPOGRAFÍA
+================================================== */
+h1{
+  font-size:clamp(34px,4.6vw,64px);
+  line-height:1.05;
+  letter-spacing:-.02em;
+}
+
+h2{
+  font-size:clamp(26px,3.2vw,46px);
+  letter-spacing:-.02em;
+}
+
+p{
+  font-size:15px;
+  line-height:1.7;
+  color:var(--muted);
+}
+
+/* ==================================================
+   BADGES / BOTONES
+================================================== */
+.badge{
+  display:inline-block;
+  padding:10px 18px;
+  border-radius:999px;
+  border:1px solid var(--border);
+  background:var(--panel);
+  font-size:13px;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:16px 28px;
+  border-radius:999px;
+  font-weight:800;
+  text-decoration:none;
+  transition:.2s ease;
+}
+
+.btn-primary{
+  background:#fff;
+  color:#05060a;
+  border:1px solid rgba(255,255,255,.45);
+  box-shadow: var(--shadow);
+}
+
+.btn-primary:hover{
+  transform:translateY(-2px);
+}
+
+.btn-ghost{
+  border:1px solid var(--border);
+  color:#fff;
+  background:var(--panel);
+}
+
+/* ==================================================
+   CARDS / PANELES (NEUTROS)
+================================================== */
+.hero-video,
+.card,
+.panel,
+.step,
+.courses-card,
+.phone-visual{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  box-shadow: var(--shadow);
+}
+
+/* ==================================================
+   GRIDS
+================================================== */
+.steps,
+.triple{
+  display:grid;
+  gap:18px;
+}
+
+.steps{ grid-template-columns:repeat(3,1fr); }
+.triple{ grid-template-columns:repeat(3,1fr); }
+
+/* ==================================================
+   MOBILE MOCKUP (3D LIMPIO, SIN GLOW EXTRA)
+================================================== */
+.phone-visual{
+  padding:32px;
+}
+
+.mock{
+  width:min(320px,85%);
+  aspect-ratio:9/19.5;
+  border-radius:44px;
+  border:1px solid rgba(255,255,255,.28);
+  background:var(--panel);
+  box-shadow:
+    var(--shadow),
+    inset 0 -24px 40px rgba(0,0,0,.85);
+position:relative;
+}
+
+/* notch */
+.mock::after{
+  content:"";
+  position:absolute;
+  top:10px;
+  left:50%;
+  transform:translateX(-50%);
+  width:120px;
+  height:26px;
+  border-radius:999px;
+  background:rgba(0,0,0,.6);
+}
+
+/* ==================================================
+   FOOTER
+================================================== */
+footer{
+  padding:60px 22px;
+  border-top:1px solid rgba(255,255,255,.08);
+  color:var(--muted2);
+  font-size:12px;
+  background:transparent;
+}
+
+.foot{
+  max-width:var(--max);
+  margin:auto;
+  display:grid;
+  grid-template-columns:1.4fr .8fr;
+  gap:22px;
+}
+
+footer a{
+  color:var(--muted);
+  text-decoration:none;
+}
+
+
+/* ==================================================
+   RESPONSIVE
+================================================== */
+@media(max-width:980px){
+  .steps,
+  .triple{
+    grid-template-columns:1fr;
+  }
+  .foot{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:520px){
+  h1{ font-size:34px; }
+  h2{ font-size:26px; }
+}

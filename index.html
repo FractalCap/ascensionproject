@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ascension Project | Libertad más allá del 9-5</title>
+  <meta name="description" content="Ascension Project es una comunidad gratuita para personas ocupadas que quieren escapar del 9-5, expandir ingresos y construir una rutina simple con guías diarias de negocios y marketing." />
+
+  <!-- Font (similar look) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#06070b;
+      --bg2:#080b12;
+      --card:rgba(255,255,255,.06);
+      --card2:rgba(255,255,255,.04);
+      --stroke:rgba(255,255,255,.12);
+      --stroke2:rgba(255,255,255,.18);
+      --text:#ffffff;
+      --muted:rgba(255,255,255,.72);
+      --muted2:rgba(255,255,255,.55);
+      --glow: rgba(255,255,255,.20);
+      --glow2: rgba(255,255,255,.32);
+      --shadow: 0 20px 60px rgba(0,0,0,.55);
+      --radius: 22px;
+      --radius2: 28px;
+      --max: 1180px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      background: var(--bg);
+      overflow-x:hidden;
+    }
+
+    /* subtle grid like reference */
+    .grid-bg{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,.06) 1px, transparent 1px);
+      background-size: 120px 120px;
+      opacity: 0;
+      mask-image: radial-gradient(60% 50% at 50% 20%, #000 40%, transparent 75%);
+      z-index:0;
+    }
+
+    .wrap{ position:relative; z-index:1; }
+
+    /* NAV */
+    .nav{
+      position:sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(180deg, rgba(6,7,11,.72), rgba(6,7,11,.22));
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .nav-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:18px 22px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+    .menu{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--muted);
+      font-weight:600;
+      letter-spacing:.02em;
+      user-select:none;
+    }
+    .burger{
+      width:38px;height:38px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.04);
+      display:grid; place-items:center;
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+    .burger span{ display:block; width:16px; height:2px; background:rgba(255,255,255,.9); position:relative; }
+    .burger span::before,.burger span::after{ content:""; position:absolute; left:0; width:16px; height:2px; background:rgba(255,255,255,.9); }
+    .burger span::before{ top:-5px; opacity:.8; }
+    .burger span::after{ top:5px; opacity:.8; }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      text-align:center;
+      flex:1;
+      justify-content:center;
+      min-width:220px;
+    }
+    .brand-mark{
+      width:34px;height:34px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.16);
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.16), rgba(255,255,255,.05));
+      box-shadow: 0 0 0 1px rgba(255,255,255,.06), 0 18px 60px rgba(0,0,0,.55);
+      display:grid; place-items:center;
+      font-weight:900;
+      letter-spacing:.06em;
+    }
+
+    .brand-mark img{
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display:block;
+    }
+    .brand small{
+      display:block;
+      font-size:10px;
+      letter-spacing:.28em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.60);
+      margin-top:3px;
+    }
+    .brand strong{
+      display:block;
+      font-size:13px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.88);
+    }
+
+    .login{
+      text-decoration:none;
+      color:rgba(255,255,255,.92);
+      font-weight:700;
+      border:1px solid rgba(255,255,255,.22);
+      background: rgba(255,255,255,.04);
+      padding:10px 16px;
+      border-radius:999px;
+      transition: .2s ease;
+      box-shadow: 0 10px 35px rgba(0,0,0,.45);
+      white-space:nowrap;
+    }
+    .login:hover{
+      border-color: rgba(255,255,255,.35);
+      transform: translateY(-1px);
+    }
+
+    /* SECTIONS (BG único, sin glow) */
+section{ padding: 86px 22px; background: var(--bg); }
+
+.container{ max-width:var(--max); margin:0 auto; }
+.center{ text-align:center; }
+
+    /* HERO */
+    .hero{ padding-top:46px; padding-bottom:70px; }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 16px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.04);
+      color: rgba(255,255,255,.82);
+      font-weight:600;
+      font-size:13px;
+      box-shadow: 0 0 0 1px rgba(255,255,255,.06), 0 18px 60px rgba(0,0,0,.55);
+      position:relative;
+    }
+    
+    h1{
+      margin:26px auto 12px;
+      font-size: clamp(34px, 4.6vw, 64px);
+      line-height:1.05;
+      letter-spacing:-.02em;
+      max-width: 980px;
+    }
+    .highlight{
+      color: rgba(255,255,255,.95);
+      position:relative;
+      display:inline-block;
+    }
+    .subline{
+      margin: 14px auto 0;
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height:1.55;
+    }
+    .hero-desc{
+      margin: 14px auto 0;
+      max-width: 840px;
+      color: rgba(255,255,255,.80);
+      font-size: 16px;
+      line-height:1.65;
+    }
+
+    .hero-video{
+      margin: 34px auto 0;
+      max-width: 960px;
+      border-radius: var(--radius2);
+      border: 1px solid rgba(255,255,255,.16);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+        .video-aspect{
+      aspect-ratio: 16/9;
+      display:grid;
+      place-items:center;
+      position:relative;
+      background:
+        radial-gradient(700px 300px at 50% 30%, rgba(255,255,255,.10), transparent 60%),
+        linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.65));
+    }
+    .video-aspect iframe{
+      width:100%;
+      height:100%;
+      border:0;
+      display:block;
+    }
+    .video-overlay{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:14px;
+      flex-direction:column;
+      padding:24px;
+      text-align:center;
+      pointer-events:none;
+    }
+    .play{
+      width:74px;height:74px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.22);
+      background: rgba(255,255,255,.08);
+      box-shadow: 0 0 0 1px rgba(255,255,255,.06), 0 0 70px rgba(255,255,255,.18);
+      display:grid; place-items:center;
+    }
+    .play:before{
+      content:"";
+      width:0;height:0;
+      border-left:14px solid rgba(255,255,255,.95);
+      border-top:10px solid transparent;
+      border-bottom:10px solid transparent;
+      margin-left:3px;
+    }
+    .video-note{
+      font-size:12px;
+      color: rgba(255,255,255,.70);
+    }
+
+    /* Primary CTA (white glow) */
+    .cta-row{
+      margin-top: 26px;
+      display:flex;
+      gap:14px;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding: 14px 18px;
+      border-radius: 999px;
+      font-weight:800;
+      text-decoration:none;
+      letter-spacing:.01em;
+      transition:.2s ease;
+      cursor:pointer;
+      user-select:none;
+      white-space:nowrap;
+    }
+    .btn-primary{
+      color:#05060a;
+      background: linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.78));
+      border: 1px solid rgba(255,255,255,.28);
+      box-shadow: 0 0 0 1px rgba(255,255,255,.14), 0 0 65px rgba(255,255,255,.24), 0 18px 55px rgba(0,0,0,.55);
+      padding: 16px 22px;
+      min-width: 260px;
+    }
+    .btn-primary:hover{ transform: translateY(-1px); box-shadow: 0 0 0 1px rgba(255,255,255,.18), 0 0 78px rgba(255,255,255,.30), 0 24px 65px rgba(0,0,0,.60); }
+    .btn-ghost{
+      color: rgba(255,255,255,.90);
+      border: 1px solid rgba(255,255,255,.20);
+      background: rgba(255,255,255,.04);
+      padding: 16px 22px;
+    }
+    .btn-ghost:hover{ transform: translateY(-1px); border-color: rgba(255,255,255,.30); }
+
+    /* social proof toasts (static replicas) */
+    .toasts{
+      position:fixed;
+      left:18px;
+      bottom:18px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      z-index:60;
+      max-width: 320px;
+    }
+    .toast{
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.55);
+      backdrop-filter: blur(10px);
+      padding:12px 12px 12px 12px;
+      box-shadow: 0 18px 55px rgba(0,0,0,.55);
+      position:relative;
+    }
+    .toast .t-title{
+      font-weight:800;
+      font-size:13px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .toast .t-sub{
+      margin-top:6px;
+      font-size:12px;
+      color: rgba(255,255,255,.70);
+    }
+    .toast .t-sub b{ color: rgba(255,255,255,.92); }
+    .toast .x{
+      color: rgba(255,255,255,.65);
+      font-weight:900;
+      border:0;
+      background:transparent;
+      cursor:pointer;
+      padding:0;
+      line-height:1;
+      pointer-events:auto;
+    }
+
+    /* PATH / SYSTEM STRIP */
+    .system{
+      padding-top: 10px;
+      padding-bottom: 30px;
+    }
+    .system-inner{
+      max-width: 980px;
+      margin: 0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+    .pill{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding: 12px 16px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.04);
+      box-shadow: 0 0 0 1px rgba(255,255,255,.06);
+      min-width: 250px;
+      justify-content:center;
+    }
+    .pill .icon{
+      width:34px;height:34px;
+      border-radius: 12px;
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.06);
+      display:grid; place-items:center;
+      box-shadow: 0 0 55px rgba(255,255,255,.08);
+      font-weight:900;
+    }
+    .pill small{
+      display:block;
+      font-size:10px;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      color: rgba(255,255,255,.55);
+      margin-bottom:2px;
+    }
+    .pill strong{
+      display:block;
+      font-size:16px;
+      letter-spacing:-.01em;
+    }
+    .arrow{
+      color: rgba(255,255,255,.60);
+      font-weight:900;
+      opacity:.8;
+    }
+
+    /* EXIT PLAN + COURSES */
+    .two-col{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 28px;
+      align-items:center;
+    }
+    .kicker{
+      color: rgba(255,255,255,.60);
+      text-transform:uppercase;
+      letter-spacing:.28em;
+      font-size:11px;
+      margin-bottom: 10px;
+    }
+    h2{
+      margin:0 0 14px;
+      font-size: clamp(26px, 3.2vw, 46px);
+      letter-spacing:-.02em;
+      line-height:1.08;
+    }
+    .p{
+      color: rgba(255,255,255,.78);
+      line-height:1.7;
+      margin: 0 0 12px;
+      font-size:15px;
+      max-width: 640px;
+    }
+    .courses-card{
+      border-radius: var(--radius2);
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.04);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+      min-height: 440px;
+    }
+        .courses-top{
+      padding: 18px 18px 10px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .courses-top h3{
+      margin:0;
+      font-size: 16px;
+      letter-spacing:.01em;
+      color: rgba(255,255,255,.90);
+    }
+    .courses-grid{
+      padding: 18px;
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .c-tile{
+      aspect-ratio: 1/1;
+      border-radius: 18px;
+      border:1px solid rgba(255,255,255,.14);
+      background:
+        radial-gradient(120px 80px at 30% 25%, rgba(255,255,255,.10), transparent 60%),
+        rgba(0,0,0,.25);
+      display:grid;
+      place-items:center;
+      position:relative;
+      overflow:hidden;
+    }
+    .c-tile span{
+      width:44px;height:44px;
+      border-radius: 16px;
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.06);
+      display:grid; place-items:center;
+      font-weight:900;
+      color: rgba(255,255,255,.92);
+      box-shadow: 0 0 45px rgba(255,255,255,.10);
+    }
+
+    /* STEPS */
+    .steps{
+      margin-top: 34px;
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .step{
+      border-radius: var(--radius2);
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.04);
+      box-shadow: 0 16px 45px rgba(0,0,0,.55);
+      overflow:hidden;
+    }
+    .step .img{
+      height: 190px;
+      background:
+        radial-gradient(220px 120px at 20% 30%, rgba(255,255,255,.12), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(0,0,0,.35));
+      border-bottom:1px solid rgba(255,255,255,.10);
+      position:relative;
+    }
+    .step .img::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background-image:
+        linear-gradient( to bottom, rgba(0,0,0,.0), rgba(0,0,0,.45));
+    }
+    .step .body{
+      padding: 18px 18px 20px;
+    }
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.04);
+      color: rgba(255,255,255,.72);
+      font-weight:800;
+      font-size:11px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .step h4{
+      margin: 10px 0 10px;
+      font-size: 16px;
+      letter-spacing:-.01em;
+      line-height:1.2;
+    }
+    .step p{
+      margin:0;
+      color: rgba(255,255,255,.70);
+      font-size: 13px;
+      line-height:1.6;
+    }
+
+    /* PHONE SECTION */
+    .phone{
+      padding-top: 30px;
+    }
+    .phone-wrap{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items:center;
+    }
+    .phone-visual{
+      border-radius: var(--radius2);
+      border:1px solid rgba(255,255,255,.14);
+      background:
+        radial-gradient(400px 240px at 60% 20%, rgba(255,255,255,.12), transparent 62%),
+        rgba(255,255,255,.03);
+      box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
+      min-height: 440px;
+      display:grid;
+      place-items:center;
+      padding: 22px;
+    }
+        .mock{
+      width:min(320px, 85%);
+      aspect-ratio: 9/19.5;
+      border-radius: 42px;
+      border:1px solid rgba(255,255,255,.20);
+      background:
+        radial-gradient(180px 120px at 30% 20%, rgba(255,255,255,.12), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.07), rgba(0,0,0,.45));
+      box-shadow: 0 24px 80px rgba(0,0,0,.65), 0 0 70px rgba(255,255,255,.10);
+      position:relative;
+      overflow:hidden;
+    }
+    .mock::after{
+      content:"";
+      position:absolute;
+      left:50%;
+      top:12px;
+      transform:translateX(-50%);
+      width: 120px;
+      height: 28px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.35);
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .mock-screen{
+      position:absolute;
+      inset:0;
+      padding: 50px 18px 18px;
+      color: rgba(255,255,255,.90);
+      font-size: 12px;
+      line-height:1.5;
+    }
+    .mock-card{
+      margin-top: 12px;
+      border-radius: 16px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      padding: 12px;
+    }
+    .mock-card b{ display:block; font-size:12px; margin-bottom:6px; }
+    .mock-card span{ color: rgba(255,255,255,.70); }
+
+    /* LAST CHANCE */
+    .last{
+      padding-top: 40px;
+      padding-bottom: 92px;
+    }
+    .last-top{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+    .mini-badge{
+      padding: 8px 14px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.04);
+      color: rgba(255,255,255,.80);
+      font-weight:800;
+      letter-spacing:.22em;
+      font-size:10px;
+      text-transform:uppercase;
+    }
+    .last h2{ text-align:center; margin-bottom: 0; }
+    .triple{
+      margin-top: 22px;
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .panel{
+      border-radius: var(--radius2);
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.04);
+      box-shadow: 0 18px 60px rgba(0,0,0,.60);
+      padding: 18px 18px 22px;
+      position:relative;
+      overflow:hidden;
+    }
+        .num{
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(0,0,0,.25);
+      display:grid;
+      place-items:center;
+      font-weight:900;
+      font-size: 20px;
+      box-shadow: 0 0 0 1px rgba(255,255,255,.06);
+      margin-bottom: 12px;
+    }
+    .panel h3{
+      margin: 10px 0 10px;
+      font-size: 18px;
+      letter-spacing:-.01em;
+    }
+    .panel p{
+      margin:0 0 10px;
+      color: rgba(255,255,255,.72);
+      font-size: 13px;
+      line-height:1.65;
+    }
+    .panel .strong{
+      margin-top: 10px;
+      color: rgba(255,255,255,.88);
+      font-weight:800;
+    }
+
+    /* FOOTER */
+    footer{
+      border-top: 1px solid rgba(255,255,255,.10);
+      padding: 34px 22px 60px;
+      color: rgba(255,255,255,.60);
+      font-size: 12px;
+      position:relative;
+    }
+    .foot{
+      max-width:var(--max);
+      margin:0 auto;
+      display:grid;
+      grid-template-columns: 1.4fr .8fr;
+      gap: 22px;
+      align-items:start;
+    }
+    .foot a{
+      color: rgba(255,255,255,.72);
+      text-decoration:none;
+      margin-right: 14px;
+    }
+    .foot a:hover{ text-decoration:underline; }
+    .disclaimer{
+      margin-top: 12px;
+      line-height:1.7;
+      color: rgba(255,255,255,.52);
+      max-width: 860px;
+    }
+    .support{
+      text-align:right;
+    }
+    .support b{ color: rgba(255,255,255,.86); }
+    .support .btn{
+      margin-top: 14px;
+      width: 100%;
+      max-width: 240px;
+      justify-content:center;
+      padding: 12px 16px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.05);
+      color: rgba(255,255,255,.85);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 980px){
+      .two-col{ grid-template-columns: 1fr; }
+      .phone-wrap{ grid-template-columns: 1fr; }
+      .courses-grid{ grid-template-columns: repeat(3, 1fr); }
+      .steps{ grid-template-columns: 1fr; }
+      .triple{ grid-template-columns: 1fr; }
+      .support{ text-align:left; }
+      .brand{ justify-content:center; }
+    }
+    @media (max-width: 520px){
+      .nav-inner{ padding: 14px 14px; }
+      .brand{ min-width: 160px; }
+      .toasts{ left:12px; right:12px; max-width:unset; }
+      .pill{ min-width: 100%; }
+      .hero-video{ border-radius: 18px; }
+    }
+  
+    /* Reduce glows locales para que el glow sea “por sección” y no por tarjeta */
+    .hero-video::before,
+    .courses-card::before,
+    .phone-visual::before,
+    .panel::before,
+    .badge::after{
+      box-shadow: none !important;
+    }
+
+  
+    /* ==================================================
+       NO GLOW MODE — BG ÚNICO, SIN HALOS
+    ================================================== */
+    /* El sitio queda con un solo color de fondo y sin glows */
+    .badge,
+    .play,
+    .pill .icon,
+    .c-tile span,
+    .brand-mark{
+      box-shadow: none !important;
+      text-shadow: none !important;
+    }
+
+    .btn-primary,
+    .btn-primary:hover,
+    .hero-video,
+    .courses-card,
+    .phone-visual,
+    .step,
+    .panel,
+    .toast{
+      box-shadow: var(--shadow) !important; /* solo sombra oscura */
+    }
+
+    .btn-primary:hover,
+    .btn-ghost:hover,
+    .login:hover{
+      transform: none !important;
+    }
+
+  
+    /* ===== FIX TEMAS: quitar iconos gigantes abajo y mejorar tamaño profesional ===== */
+    .courses-card { overflow: hidden; }
+
+    .courses-grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .c-tile{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      text-align:center;
+      min-height: 140px;
+    }
+
+    /* Icono principal de cada cuadro (más grande, profesional) */
+    .c-tile span{
+      font-size: 34px;          /* más grande sin romper layout */
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      display:grid;
+      place-items:center;
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.06);
+      box-shadow: 0 10px 30px rgba(0,0,0,.45);
+    }
+
+    .c-tile small{
+      margin-top:6px;
+      font-size:12px;
+      color: rgba(255,255,255,.82);
+      letter-spacing:.04em;
+    }
+
+    /* Evita que aparezcan iconos sueltos debajo */
+    .courses-card > .c-tile,
+    .courses-card .c-tile:only-child{
+      display:none;
+    }
+
+.step-img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+</style>
+</head>
+
+<body>
+  <div class="grid-bg"></div>
+
+  <!-- Static "proof" cards (you can remove them later) -->
+  <div class="toasts" aria-hidden="true">
+    <div class="toast">
+      <div class="t-title">
+        <span>✅ Bienvenido a Ascension Project</span>
+        <button class="x" onclick="this.closest('.toast').style.display='none'">×</button>
+      </div>
+      <div class="t-sub"><b>Nuevo miembro</b> se unió a la comunidad gratuita</div>
+    </div>
+    <div class="toast">
+      <div class="t-title">
+        <span>✨ Guías diarias activas</span>
+        <button class="x" onclick="this.closest('.toast').style.display='none'">×</button>
+      </div>
+      <div class="t-sub">Aprendizajes de <b>negocios & marketing</b> todos los días</div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <!-- NAV -->
+    <div class="nav">
+      <div class="nav-inner">
+<div class="brand" aria-label="Ascension Project">
+          <div class="brand-mark"><img src="icon.png" alt="Ascension Project" /></div>
+          <div>
+            <strong>ASCENSION PROJECT</strong>
+            <small>LIBERTAD · RUTINA · PROGRESO</small>
+          </div>
+        </div>
+</div>
+    </div>
+
+    <!-- HERO -->
+    
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container center">
+
+        <h1 style="margin-bottom:24px;">
+          Conviértete en ese <span class="highlight">personaje</span> que deseas ser
+        </h1>
+
+        <!-- VIDEO LOCAL -->
+        <div class="hero-video">
+          <div class="video-aspect">
+            <video controls autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;">
+              <source src="0108.mp4" type="video/mp4">
+              Tu navegador no soporta video HTML5.
+            </video>
+          </div>
+        </div>
+
+        <div class="badge" style="margin-top:32px;">🚀 Acceso Abierto · Comunidad gratuita de Telegram</div>
+
+        <h1>
+          Construye tu <span class="highlight">libertad</span> sin quemarte,<br />
+          incluso si estás ocupado
+        </h1>
+
+        <p class="subline">
+          <br />
+          Ascension Project te da una ruta simple para escapar del 9-5 con progreso diario.
+        </p>
+
+        <p class="hero-desc">
+          Ascension Project ayuda a personas ocupadas a expandir sus ingresos con
+          <b>guías y aprendizajes gratuitos</b> todos los días sobre negocios digitales y marketing,
+          aplicables tanto a negocios online como físicos. Empieza con pasos pequeños, sin suponer
+          grandes esfuerzos al inicio. Además, enseñamos <b>métodos para generar ingresos pasivos</b> con una rutina mínima: <b>5 minutos</b> al día (y hasta <b>50 minutos</b> si tienes más tiempo), para que avances incluso con una agenda llena.
+        </p>
+
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://t.me/ascensionprojct" target="_blank" rel="noopener">
+            Unirme gratis a Telegram <span aria-hidden="true">→</span>
+          </a>
+          <a class="btn btn-ghost" href="https://t.me/ascensionprojct" target="_blank" rel="noopener">
+            Ver el sistema <span aria-hidden="true">→</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- PATH / SYSTEM -->
+    <section class="system" id="exit">
+      <div class="container">
+        <div class="system-inner">
+          <div class="pill">
+            <div class="icon">📘</div>
+            <div>
+              <small>APRENDIZAJE DIARIO</small>
+              <strong>Guías prácticas</strong>
+            </div>
+          </div>
+          <div class="arrow">→</div>
+          <div class="pill">
+            <div class="icon">⏱️</div>
+            <div>
+              <small>PARA OCUPADOS</small>
+              <strong>Rutina simple</strong>
+            </div>
+          </div>
+          <div class="arrow">→</div>
+          <div class="pill">
+            <div class="icon">🤝</div>
+            <div>
+              <small>COMUNIDAD</small>
+              <strong>Soporte y claridad</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="center" style="margin-top:22px;">
+          <a class="btn btn-primary" href="https://t.me/ascensionprojct" target="_blank" rel="noopener">
+            Entrar gratis ahora <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXIT PLAN + COURSES -->
+    <section>
+      <div class="container two-col">
+        <div>
+          <div class="kicker">EL PLAN QUE CASI NADIE TE ENSEÑA</div>
+          <h2>La salida del 9–5 empieza con un sistema simple</h2>
+
+          <p class="p">
+            No necesitas hacer “todo” hoy. Necesitas una ruta clara:
+            aprende un poco cada día, aplica en pequeñas acciones y construye resultados
+            sin agotarte.
+          </p>
+
+          <p class="p">
+            En Ascension Project compartimos contenidos diarios de negocios digitales y marketing,
+            diseñados para que puedas aplicarlos a tu situación real (poco tiempo, mucha carga,
+            pero ganas de crecer).
+          </p>
+
+          <p class="p">
+            Aquí no vas a encontrar promesas irreales.
+            Vas a encontrar <b>claridad, consistencia</b> y una comunidad que empuja hacia adelante.
+          </p>
+
+          <div class="cta-row" style="justify-content:flex-start;">
+            <a class="btn btn-primary" href="https://t.me/ascensionprojct" target="_blank" rel="noopener">Unirme a Telegram →</a>
+            <a class="btn btn-ghost" href="https://t.me/ascensionprojct" target="_blank" rel="noopener">Ver pasos →</a>
+          </div>
+        </div>
+
+        <div class="courses-card" aria-label="Nuestros temas">
+          <div class="courses-top">
+            <h3>Nuestros temas</h3>
+            <div class="mini-badge" style="letter-spacing:.18em;">DIARIO</div>
+          </div>
+
+          
+          <div class="courses-grid">
+            <div class="c-tile"><span>💼</span><small>Negocio digital</small></div>
+            <div class="c-tile"><span>📣</span><small>Liderazgo</small></div>
+            <div class="c-tile"><span>🧠</span><small>Mentalidad</small></div>
+            <div class="c-tile"><span>❤️</span><small>Amor</small></div>
+            <div class="c-tile"><span>📈</span><small>Inversiones</small></div>
+            <div class="c-tile"><span>🧩</span><small>Consejos</small></div>
+            <div class="c-tile"><span>🛒</span><small>Ventas</small></div>
+            <div class="c-tile"><span>💸</span><small>Ingresos pasivos</small></div>
+            <div class="c-tile"><span>🎯</span><small>Motivación para metas</small></div>
+          </div>
+
+            <div class="c-tile"><span>📣</span></div>
+            <div class="c-tile"><span>🧠</span></div>
+            <div class="c-tile"><span>⚙️</span></div>
+            <div class="c-tile"><span>📈</span></div>
+            <div class="c-tile"><span>🧩</span></div>
+            <div class="c-tile"><span>🛒</span></div>
+            <div class="c-tile"><span>✍️</span></div>
+            <div class="c-tile"><span>🎯</span></div>
+          </div>
+
+          
+        </div>
+      </div>
+
+      <!-- Steps -->
+      <div class="container" id="steps" style="margin-top:28px;">
+        <div class="steps">
+          <article class="step">
+            <div class="img"><img src="paso1.jpg" alt="Paso 1" class="step-img"></div>
+            <div class="body">
+              <span class="chip">Paso 1</span>
+              <h4>Entra a la comunidad y entiende la ruta</h4>
+              <p>Acceso gratuito. Empiezas por lo esencial: claridad, enfoque y una rutina realista.</p>
+            </div>
+          </article>
+
+          <article class="step">
+            <div class="img"><img src="paso2.jpg" alt="Paso 2" class="step-img"></div>
+            <div class="body">
+              <span class="chip">Paso 2</span>
+              <h4>Aprende todos los días y aplica en pequeño</h4>
+              <p>Guías diarias de negocios & marketing. Acción mínima, progreso constante.</p>
+            </div>
+          </article>
+
+          <article class="step">
+            <div class="img"><img src="paso3.jpg" alt="Paso 3" class="step-img"></div>
+            <div class="body">
+              <span class="chip">Paso 3</span>
+              <h4>Expande ingresos sin quemarte</h4>
+              <p>Construye un segundo ingreso con un sistema simple que puedas sostener.</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="center" style="margin-top:22px;">
+          <p class="p" style="max-width:820px; margin:0 auto;">
+            Esta es tu forma de salir: no necesitas perfección, necesitas consistencia.
+            La pregunta no es “¿por qué empezar?”, sino “¿cuánto tiempo más vas a posponerlo?”.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="https://t.me/ascensionprojct" target="_blank" rel="noopener">Unirme gratis →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PHONE / FOCUS YEAR -->
+    <section class="phone">
+      <div class="container phone-wrap">
+        <div>
+          <div class="kicker">UN AÑO DE FOCO CAMBIA TODO</div>
+          <h2>Bloquéate este año. Construye tu nueva normalidad.</h2>
+
+          <p class="p">
+            Si estás ocupado, no necesitas “más motivación”.
+            Necesitas un plan sencillo, con aprendizajes diarios y una comunidad que te mantenga alineado. Y si solo tienes un momento, también te damos estrategias de <b>ingresos pasivos</b> que puedes ejecutar en <b>5 minutos</b> diarios (o profundizar hasta <b>50 minutos</b>).
+          </p>
+
+          <p class="p">
+            Aprende marketing digital y negocios que puedes aplicar a tu proyecto online o físico.
+            Empieza con poco, y escala a tu ritmo.
+          </p>
+
+          <div class="cta-row" style="justify-content:flex-start;">
+            <a class="btn btn-primary" href="https://t.me/ascensionprojct" target="_blank" rel="noopener">Entrar a Telegram →</a>
+            <a class="btn btn-ghost" href="https://t.me/ascensionprojct" target="_blank" rel="noopener">Ver última sección →</a>
+          </div>
+        </div>
+
+        <div class="phone-visual">
+          <div class="mock" aria-label="Mockup de app">
+            <div class="mock-screen">
+              <div style="font-weight:900; letter-spacing:.04em;">ASCENSION</div>
+              <div style="color:rgba(255,255,255,.65); margin-top:4px;">Rutina · Guías · Acción</div>
+
+              <div class="mock-card">
+                <b>Guía del día</b>
+                <span>Idea simple para aplicar hoy (15–30 min).</span>
+              </div>
+
+              <div class="mock-card">
+                <b>Marketing aplicado</b>
+                <span>Pasos claros para atraer clientes o ventas.</span>
+              </div>
+
+              <div class="mock-card">
+                <b>Negocios digitales</b>
+                <span>Modelos y enfoque para personas ocupadas.</span>
+              </div>
+
+              <div class="mock-card">
+                <b>Comunidad</b>
+                <span>Soporte, claridad y progreso constante.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Si tienes una imagen real del teléfono, reemplaza el mock por:
+               <img src="assets/phone.png" alt="Ascension Project en móvil" style="width:min(420px,90%); height:auto; border-radius:28px; border:1px solid rgba(255,255,255,.16); box-shadow:var(--shadow);" />
+          -->
+        </div>
+      </div>
+    </section>
+
+    <!-- LAST CHANCE -->
+    <section class="last" id="last">
+      <div class="container">
+        <div class="last-top">
+          <div class="mini-badge">SIN TIEMPO QUE PERDER</div>
+          <h2>Tu próxima etapa empieza con una decisión</h2>
+        </div>
+
+        <div class="triple">
+          <div class="panel">
+            <div class="num">1</div>
+            <h3>Te estás quedando sin tiempo</h3>
+            <p>Si tu rutina no cambia, tu vida se queda igual. Empieza con un sistema que puedas sostener.</p>
+            <p class="strong">Pequeño paso hoy, gran cambio después.</p>
+          </div>
+
+          <div class="panel">
+            <div class="num">2</div>
+            <h3>Necesitas claridad, no estrés</h3>
+            <p>La sobrecarga de información te paraliza. Aquí encuentras guías diarias simples y aplicables.</p>
+            <p class="strong">Menos ruido. Más ejecución.</p>
+          </div>
+
+          <div class="panel">
+            <div class="num">3</div>
+            <h3>Aprende una habilidad con impacto</h3>
+            <p>Marketing y negocios son habilidades multiplicadoras. Sirven para online y para negocios físicos.</p>
+            <p class="strong">Toma control paso a paso.</p>
+          </div>
+        </div>
+
+        <div class="center" style="margin-top:24px;">
+          <a class="btn btn-primary" href="https://t.me/ascensionprojct" target="_blank" rel="noopener" style="min-width:320px;">
+            Unirme gratis a Ascension Project →
+          </a>
+          <div style="margin-top:12px; color:rgba(255,255,255,.58); font-size:12px;">
+            Acceso gratuito · Sin spam · Sin promesas irreales
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="foot">
+        <div>
+          <div style="margin-bottom:8px;">
+            <a href="https://t.me/ascensionprojct" target="_blank" rel="noopener">Términos</a>
+            <a href="https://t.me/ascensionprojct" target="_blank" rel="noopener">Privacidad</a>
+            <a href="https://t.me/ascensionprojct" target="_blank" rel="noopener">Membresía</a>
+          </div>
+          <div class="disclaimer">
+            Ascension Project comparte contenido educativo con fines informativos. Los resultados dependen de cada persona,
+            su contexto y su ejecución. No se garantizan resultados financieros. Construye con responsabilidad.
+          </div>
+          <div style="margin-top:12px;">© <span id="y"></span> Ascension Project</div>
+        </div>
+
+        <div class="support">
+          <div><b>SUPPORT</b></div>
+          <div style="margin-top:8px; color:rgba(255,255,255,.70);">support@ascensionproject.com</div>
+</div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    // Year
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
