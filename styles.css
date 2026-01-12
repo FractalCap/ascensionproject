@@ -358,3 +358,8 @@ footer a{
   border-radius: 14px;
   padding: 14px 16px;
 }
+
+/* Ensure buttons visible on desktop */
+@media (min-width: 981px){
+  .mobile-cta{ display:none !important; }
+}
