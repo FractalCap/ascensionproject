@@ -286,3 +286,75 @@ footer a{
   h1{ font-size:34px; }
   h2{ font-size:26px; }
 }
+
+
+/* ================= MOBILE FIRST ENHANCEMENTS ================= */
+:root{
+  --safe-top: env(safe-area-inset-top);
+  --safe-bottom: env(safe-area-inset-bottom);
+}
+
+/* Improve tap targets */
+.btn, .login{
+  min-height: 48px;
+}
+
+/* Sticky CTA on mobile */
+.mobile-cta{
+  position: fixed;
+  left: 12px;
+  right: 12px;
+  bottom: calc(12px + var(--safe-bottom));
+  z-index: 70;
+  display: none;
+}
+
+/* Responsive media */
+.hero-video, .video-aspect, .step .img{
+  width: 100%;
+}
+
+/* Grid fixes */
+.courses-grid{
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* Steps stack nicely */
+.steps{
+  grid-template-columns: 1fr;
+}
+
+/* Phone mock full width on small screens */
+.phone-wrap{
+  grid-template-columns: 1fr;
+}
+
+/* Reduce heavy shadows on low-end devices */
+@media (max-width: 520px){
+  .btn-primary, .hero-video, .courses-card, .phone-visual, .step, .panel, .toast{
+    box-shadow: 0 12px 36px rgba(0,0,0,.45) !important;
+  }
+  h1{ font-size: 32px; }
+  h2{ font-size: 24px; }
+  .hero{ padding-top: 28px; padding-bottom: 48px; }
+  section{ padding: 64px 16px; }
+  .nav-inner{ padding: 12px 14px; }
+  .brand small{ display:none; }
+  .courses-grid{ grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .step .img{ height: 160px; }
+  .cta-row{ gap: 10px; }
+  .mobile-cta{ display:block; }
+}
+
+/* Larger phones */
+@media (min-width: 521px) and (max-width: 980px){
+  .courses-grid{ grid-template-columns: repeat(3, 1fr); }
+  .steps{ grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Sticky bottom bar content */
+.mobile-cta .btn{
+  width: 100%;
+  border-radius: 14px;
+  padding: 14px 16px;
+}
